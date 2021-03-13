@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Row, Col, Form } from "react-bootstrap";
+import { Button, ProgressBar, Col, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 
@@ -15,12 +15,8 @@ const PhoneVerify = () => {
     }
     return (
         <div style={styles.root}>
-           <Form>
-                <Form.Group controlId="formBasicRange">
-                    <Form.Label>Step 1/3</Form.Label>
-                    <Form.Control type="range" />
-                </Form.Group>
-            </Form>
+                    <p>Step 1/3</p>
+                    <ProgressBar variant="warning" style={{height:"8px"}} now={30} />
            {!code ? 
            <>
             <b><h2>Phone Verification</h2></b>

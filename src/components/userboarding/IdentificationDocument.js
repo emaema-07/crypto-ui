@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Button, Form, Spinner } from "react-bootstrap";
+import { Button, Form, Spinner,ProgressBar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 
@@ -9,27 +9,32 @@ const IdentificationDocument = () => {
     const history = useHistory();
     const [document,setDocument] = useState(false)
     const [load,setLoad] = useState(false)
+    const [complete,setComplete] = useState(false)
 
     const onSubmit = () =>{
 
-        history.push("/login");
+        history.push("/");
     }
+
+   const completedDocument = () => {
+       const intervalId = setInterval(() => {
+        setComplete(true)
+    }, 5000);
+
+   }
 
     useEffect(() => {
     const intervalId = setInterval(() => {
         setLoad(true)
-    }, 10000);
+        completedDocument()
+    }, 5000);
     
   },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div style={styles.root}>
-            <Form>
-                <Form.Group controlId="formBasicRange">
-                    <Form.Label>Step 1/3</Form.Label>
-                    <Form.Control type="range" />
-                </Form.Group>
-            </Form>
+             <p>Step 3/3</p>
+            <ProgressBar variant="warning" style={{height:"8px"}} now={100} />
             <b><h2>Identification Document</h2></b>
            {!document ?
            <>
@@ -43,6 +48,14 @@ const IdentificationDocument = () => {
                     Continue
                 </Button>
             </>:
+            complete ? 
+            <div style={{textAlign:"center",marginTop:"20%"}}>
+            <h6>Verification completed</h6>
+             <p>Congrats! You've been approved</p>
+             <Button variant="warning"  block onClick ={ () => onSubmit()} >
+                    Load Your Card
+                </Button>
+            </div>:
             !load ? 
             <div style={{textAlign:"center",marginTop:"20%"}}>
             <h6>Upload from your mobile phone</h6>
