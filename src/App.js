@@ -30,10 +30,10 @@ export default App;
 
 const styles = {
   cardStyle: {
-    width: "50%",
+    width: "40%",
     position: "absolute",
     left:" 50%",
-    top: "30%",
+    top: "40%",
     transform: "translate(-50%, -50%)",
   },
   footer_style: {

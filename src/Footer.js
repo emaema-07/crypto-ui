@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
         </Col>
       </Row>
-      <div style={{position: 'absolute', bottom: 5, left: 20}}>
+      <div style={{textAlign: 'left'}}>
         <p style={{color: 'white', opacity: 0.5}}>@Mezoman Ltd. 2 Vasil Aprilov Burgas, 8200, Bulgaria</p>
       </div>
     </Container>
