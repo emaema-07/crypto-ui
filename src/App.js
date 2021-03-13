@@ -2,14 +2,14 @@ import React from 'react';
 
 import './App.css';
 import Router from './router';
-import { Jumbotron, Container, Card, Row, Col } from 'react-bootstrap'
+import { Jumbotron, Card, } from 'react-bootstrap'
 import Footer from './Footer';
 
 function App() {
   return (
     <div className="App">
-      <div style={{position: 'absolute', left: 30, top: 30}}>
-        <h4>SPENDL</h4>
+      <div style={styles.logo_style}>
+        <h4>{'s'}</h4>
       </div>
       <Card style={styles.cardStyle}>
         <Card.Body>
@@ -29,6 +29,14 @@ function App() {
 export default App;
 
 const styles = {
+  logo_style: {
+    backgroundImage: "url('https://getspendl.com/wp-content/themes/understrap-child/img/logo.svg')",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'left',
+    marginTop: 20,
+    marginLeft: 20,
+    position: "relative",
+  },
   cardStyle: {
     width: "40%",
     position: "absolute",
@@ -42,7 +50,7 @@ const styles = {
     width: "100%",
     height: "25%",
     marginBottom: 0,
-    backgroundColor: '#2a1c41',
+    backgroundColor: '#1b243f',
     padding: 0,
   },
   footer_text_style: {

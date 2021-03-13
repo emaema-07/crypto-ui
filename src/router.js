@@ -2,15 +2,14 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import HomePage from './components/userboarding/HomePage';
 import LoginPage from './components/userboarding/LoginPage';
 import VerifyEmail from './components/userboarding/VerifyEmail';
-import PhoneVerify from './components/userboarding/PhoneVerification';
-import Address from './components/userboarding/Address';
-import IdentificationDocument from './components/userboarding/IdentificationDocument';
+import PhoneVerify from './components/kyc/PhoneVerification';
+import Address from './components/kyc/Address';
+import IdentificationDocument from './components/kyc/IdentificationDocument';
 
 const MainRouter = () => {
   return (

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Button, ProgressBar, Col, Form } from "react-bootstrap";
+import React from 'react';
+import { Button, ProgressBar, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 
