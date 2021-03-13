@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Form, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 
 
 const VerifyEmail = () => {
+    const history = useHistory();
+
+    const onSubmit = () =>{
+
+        history.push("/phone-verify");
+    }
+
     return (
         <div> 
             <h2 >Verify Your Email</h2>
@@ -13,7 +21,7 @@ const VerifyEmail = () => {
                 <p style={{ textAlign: 'left' }}>Confirmation code</p>
                 <Form.Control type="email" placeholder="Required" style={styles.textfield}/>
             </Form.Group>
-            <Button variant="warning"  block>
+            <Button variant="warning"  block onClick = { () => onSubmit()}>
               Next
             </Button>
         </Form>
