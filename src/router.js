@@ -10,7 +10,12 @@ import VerifyEmail from './components/userboarding/VerifyEmail';
 import PhoneVerify from './components/kyc/PhoneVerification';
 import Address from './components/kyc/Address';
 import IdentificationDocument from './components/kyc/IdentificationDocument';
-
+import Load from './components/kyc/afterKyc/load';
+import Dashboard from './components/dashboard/dashboard';
+import LoadHistory from './components/dashboard/loadHistory';
+import TransactionHistory from './components/dashboard/transactionHistory';
+import BuyCrypto from './components/dashboard/buycrypto';
+ 
 const MainRouter = () => {
   return (
     <Router>
@@ -29,6 +34,21 @@ const MainRouter = () => {
         </Route>
         <Route path="/document">
           <IdentificationDocument />
+        </Route>
+        <Route path="/load">
+          <Load />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/load-history">
+          <LoadHistory />
+        </Route>
+        <Route path="/transaction-history">
+          <TransactionHistory />
+        </Route>
+        <Route path="/buycrypto">
+          <BuyCrypto />
         </Route>
         <Route path={["/home-page", "/"]}>
           <HomePage />
