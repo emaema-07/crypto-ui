@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div style={styles.logo_style}>
-        <h4>{'s'}</h4>
+        <h4 style={{display: 'none'}}>{'s'}</h4>
       </div>
       <Card style={styles.cardStyle}>
         <Card.Body>
