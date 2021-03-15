@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { actions } from "../../store/reducer/initial";
+import { actions } from "../../store/reducers/initial";
 
 const LoginPage = props => {
   const [state, setState] = useState({
