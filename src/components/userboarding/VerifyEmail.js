@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { actions } from "../../store/reducers/profile";
 
-const VerifyEmail = () => {
+const VerifyEmail = (props) => {
   const history = useHistory();
   const [state, setState] = useState({
     code: null
@@ -10,6 +12,10 @@ const VerifyEmail = () => {
   const onSubmit = () => {
     history.push("/phone-verify");
   };
+
+  useEffect(() => {
+    props.clearStatus();
+  },[]) //eslint-disable-line
 
   return (
     <div>
@@ -42,7 +48,14 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+const mapStateToProps = state => {
+  return {
+    initialData: state.initial.details,
+  };
+};
+export default connect(mapStateToProps, {
+  clearStatus: actions.clearStatus,
+})(VerifyEmail);
 
 const styles = {
   textfield: {

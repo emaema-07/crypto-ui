@@ -17,7 +17,7 @@ export default function configureStore() {
   const enhancer = compose(
     applyMiddleware(...middleware),
     devTools({
-      name: 'moonpay',
+      name: 'spendl',
       realtime: true,
     }),
   );

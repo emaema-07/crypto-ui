@@ -7,11 +7,15 @@ import { useHistory } from "react-router-dom";
 const Address = () => {
 
     const history = useHistory();
+    // const[state, setState] = useState({
+    //     phone_number: null,
+    // })
 
     const onSubmit = () => {
 
         history.push("/document");
     }
+    
     return (
         <div style={styles.root}>
              <p>Step 2/3</p>

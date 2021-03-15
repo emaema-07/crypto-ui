@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { actions } from "../../store/reducers/initial";
+import { actions } from "../../store/reducers/profile";
 
 const LoginPage = props => {
   const [state, setState] = useState({
     login: false,
-    username: null,
+    email: null,
     password: null
   });
   const history = useHistory();
+
+  useEffect(() => {
+    if(props && props.loginStatus){
+      localStorage.setItem('user_token', props.userToken);
+      JSON.stringify(localStorage.setItem('user_details', props.profileDetails))
+      history.push("/verify");
+    }
+  },[props]) //eslint-disable-line
 
   const onHandleChange = (item, data) => {
     setState({ ...state, [item]: data.target.value });
@@ -20,9 +28,34 @@ const LoginPage = props => {
     setState({ ...state, login: !state.login });
   };
 
-  const onSubmit = () => {
-    props.onFirstCall({ email: "emachalanema@gmail.com" });
-    history.push("/verify");
+  const validateEmail = (email) => {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+  }
+
+  const onLoginSubmit = () => {
+    if(validateEmail(state.email) && state.password){
+    const data = {
+      email: state.email,
+      password: state.password,
+    }
+    props.loginCall(data)
+  }else{
+    alert('Insert proper fields');
+  }
+  };
+
+  const onSignUpSubmit = () => {
+    if(validateEmail(state.email) && state.password){
+      const data = {
+        email: state.email,
+        password: state.password,
+        username: state.email
+      }
+      props.signUpCall(data)
+    }else{
+      alert('Insert proper fields');
+    }
   };
 
   return (
@@ -60,7 +93,7 @@ const LoginPage = props => {
             <Form.Control
               type="email"
               placeholder="Required"
-              onChange={event => onHandleChange("username", event)}
+              onChange={event => onHandleChange("email", event)}
               style={styles.textfield}
             />
           </Form.Group>
@@ -78,7 +111,7 @@ const LoginPage = props => {
             style={styles.btn_style}
             variant="warning"
             block
-            onClick={() => onSubmit()}
+            onClick={() => onLoginSubmit()}
           >
             Log in
           </Button>
@@ -89,7 +122,7 @@ const LoginPage = props => {
             <p style={{ textAlign: "left" }}>Your Email</p>
             <Form.Control
               type="email"
-              onChange={event => onHandleChange("username", event)}
+              onChange={event => onHandleChange("email", event)}
               placeholder="Required"
               style={styles.textfield}
             />
@@ -129,7 +162,7 @@ const LoginPage = props => {
             style={styles.btn_style}
             variant="warning"
             block
-            onClick={() => onSubmit()}
+            onClick={() => onSignUpSubmit()}
           >
             Sign Up
           </Button>
@@ -160,16 +193,18 @@ const LoginPage = props => {
   );
 };
 
-// export default LoginPage;
 
 const mapStateToProps = state => {
-  console.log("reducer state", state);
   return {
-    initialData: state.initial.details
+    initialData: state.initial.details,
+    profileDetails: state.profile.user_details,
+    userToken: state.profile.user_token,
+    loginStatus: state.profile.login_success,
   };
 };
 export default connect(mapStateToProps, {
-  onFirstCall: actions.firstCall
+  signUpCall: actions.signUpCall,
+  loginCall: actions.loginCall
 })(LoginPage);
 
 const styles = {
