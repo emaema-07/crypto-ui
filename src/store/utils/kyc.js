@@ -12,6 +12,7 @@ export async function setKycdetailsReq(params) {
       body: JSON.stringify(params.data)
     });
     const json = await response.json();
+    console.log('kyc created', json);
     return json;
   } catch (error) {
     return error;
