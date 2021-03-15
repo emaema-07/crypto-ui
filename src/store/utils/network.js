@@ -1,6 +1,6 @@
 
-const baseRestUrl = 'http://localhost:5000/api/v1/';
-// const baseRestUrl = 'https://spendl-api.herokuapp.com/api/v1/';
+// const baseRestUrl = 'http://localhost:5000/api/v1/';
+const baseRestUrl = 'https://spendl-api.herokuapp.com/api/v1/';
 
 
 export const getFirstCall = () => ({
