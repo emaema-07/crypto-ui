@@ -1,12 +1,20 @@
 export const constants = {
   STORE_KEY_DETAILS: "STORE_KEY_DETAILS",
 
+  CLEAR_STATUS: "CLEAR_STATUS",
+
   SET_KYC_DETAILS: "SET_KYC_DETAILS",
   SET_KYC_DETAILS_SUCCESS: "SET_KYC_DETAILS_SUCCESS",
   SET_KYC_DETAILS_FAILURE: "SET_KYC_DETAILS_FAILURE"
 };
 
 export const actions = {
+  clearStatus: params => {
+    return {
+      type: constants.CLEAR_STATUS,
+      payload: params
+    };
+  },
   storeKycDetails: params => {
     return {
       type: constants.STORE_KEY_DETAILS,
@@ -35,15 +43,21 @@ export const actions = {
 
 export const initialState = {
   kyc_details: null,
-  isLoading: false
+  isLoading: false,
+  kyc_success: false,
 };
 
 export const kycReducer = (state = initialState, action) => {
   switch (action.type) {
+    case constants.CLEAR_STATUS: 
+      return {
+        ...state,
+        kyc_success: false
+      }
     case constants.STORE_KEY_DETAILS:
       return {
         ...state,
-        kyc_details: [...state.kyc_details, ...action.payload]
+        kyc_details: {...state.kyc_details, ...action.payload}
       };
     case constants.SET_KYC_DETAILS:
       return {
@@ -54,7 +68,8 @@ export const kycReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        kyc_details: action.payload.data
+        kyc_details: action.payload.data,
+        kyc_success: true,
       };
     case constants.SET_KYC_DETAILS_FAILURE:
       return {

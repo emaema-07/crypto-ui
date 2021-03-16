@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Button, Spinner, ProgressBar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { actions } from "../../store/reducers/kyc";
 
-const IdentificationDocument = () => {
+const IdentificationDocument = (props) => {
   const history = useHistory();
   const [document, setDocument] = useState(false);
+  const [state, setState] = useState({
+    userToken: null,
+    userDetails: null,
+  });
   const [load, setLoad] = useState(false);
   const [complete, setComplete] = useState(false);
-
-  const onSubmit = () => {
-    history.push("/");
-  };
-
-  const completedDocument = () => {
-    setInterval(() => {
-      setComplete(true);
-    }, 5000);
-  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,6 +23,34 @@ const IdentificationDocument = () => {
       clearInterval(intervalId);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const userToken = localStorage.getItem('user_token');
+    const userDetails = localStorage.getItem('user_details');
+    console.log('userDetailsfsddsf', JSON.parse(userDetails))
+    setState({...state, userToken: userToken, userDetails: JSON.parse(userDetails)})
+  },[])
+  
+  const onSubmit = () => {
+    let values = {
+      user_id: state.userDetails._id,
+      phone_number: props.kycDetails.phone_number,
+      street: props.kycDetails.street,
+      city: props.kycDetails.city,
+      country: props.kycDetails.country,
+      zip_code: props.kycDetails.zip_code,
+      state: props.kycDetails.state,
+    }
+    props.setKycDetailsCall({token: state.userToken,data: values})
+    history.push("/");
+  };
+
+  const completedDocument = () => {
+    setInterval(() => {
+      setComplete(true);
+    }, 5000);
+  };
+
 
   return (
     <div style={styles.root}>
@@ -78,7 +102,15 @@ const IdentificationDocument = () => {
   );
 };
 
-export default IdentificationDocument;
+const mapStateToProps = state => {
+  return {
+    initialData: state.initial.details,
+    kycDetails: state.kyc.kyc_details,
+  };
+};
+export default connect(mapStateToProps, {
+  setKycDetailsCall: actions.setKycDetailsCall,
+})(IdentificationDocument);
 
 const styles = {
   root: {

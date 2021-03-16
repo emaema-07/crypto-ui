@@ -15,7 +15,7 @@ const LoginPage = props => {
   useEffect(() => {
     if(props && props.loginStatus){
       localStorage.setItem('user_token', props.userToken);
-      JSON.stringify(localStorage.setItem('user_details', props.profileDetails))
+      localStorage.setItem('user_details', JSON.stringify(props.profileDetails))
       history.push("/verify");
     }
   },[props]) //eslint-disable-line
