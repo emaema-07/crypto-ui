@@ -45,7 +45,7 @@ const IdentificationDocument = props => {
       state: props.kycDetails.state
     };
     props.setKycDetailsCall({ token: state.userToken, data: values });
-    history.push("/");
+    history.push("/dashboard");
   };
 
   const completedDocument = () => {

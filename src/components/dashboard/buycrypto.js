@@ -65,7 +65,7 @@ const BuyCrypto = props => {
 
   useEffect(() => {
     if (props && props.isSuccess) {
-      history.push("/");
+      history.push("/dashboard");
     }
   }, [props]); // eslint-disable-line
 

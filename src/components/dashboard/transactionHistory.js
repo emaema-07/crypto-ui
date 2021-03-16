@@ -4,6 +4,7 @@ import { GrFormClose } from 'react-icons/gr';
 import { MdHourglassEmpty } from 'react-icons/md';
 import { connect } from 'react-redux';
 import {actions} from '../../store/reducers/tradeHistory';
+import Moment from 'moment';
 
 const TransactionHistory = (props) => {
 
@@ -22,6 +23,7 @@ const TransactionHistory = (props) => {
       setState({...state, data: props.tradeHistory})
     }
   },[props]) // eslint-disable-line
+ 
   return (
     <div>
       <div style={styles.head}>
@@ -35,14 +37,20 @@ const TransactionHistory = (props) => {
               <h4 style={{ textAlign: "left", }}>Transaction History</h4>
               <GrFormClose />
             </div>
-            {state.data && state.data.length > 0 ?
-            
-            <div style={styles.head}>
-            <p> Bought BTC</p>
-            <p >15/09/2021</p>
-            <p >€2000</p>
-            </div>:
-            <>
+            {state.data && state.data.length > 0 ? 
+      <div>
+        {state.data && state.data.length > 0 &&state.data.map((item, i) => {
+        return (
+        <div style={styles.head1} >
+          
+            <p style={{ fontWeight: 'bold'}}>
+              {item.type === "Buy" ? <p> Bought {item.coin && String(item.coin.split(" ", 1))}</p>  : <p> Sold { item.coin && String(item.coin.split(" ", 1))}</p> }</p>
+            <p >{Moment(item.transaction_date).format('DD-MM-YYYY')}</p>
+          
+          <p >~{item.amount ? parseFloat(item.amount).toFixed(2) : 0}</p>
+        </div>)})}
+        </div>
+            :<>
             <MdHourglassEmpty style={{ height: "10%", width: "10%" }} />
               <p>seems like your Transaction History box is empty</p> </>
             }
@@ -72,7 +80,9 @@ const styles = {
     justifyContent: 'space-between'
   },
   head1: {
-    padding: 5,
+    textAlign: "left",
     display: "flex",
+    justifyContent: 'space-between',
+    marginTop:"15%"
   }
 };
