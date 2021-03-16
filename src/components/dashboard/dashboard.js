@@ -19,12 +19,13 @@ const Dashboard = () => {
                             <h4 style={{ textAlign: "left", color: "#f8f9fa" }}> SPENDL </h4>
                             {!menu ? 
                             <Button variant="light" style={{ borderRadius: '50px' }} onClick={() => setMenu(true)}>Load</Button>:
-                                <Card style={{ width: '12rem',  textAlign: "right", }}>
+                                <Card style={{ width: '12rem',cursor:'pointer'}}>
                                     <ListGroup variant="flush">
                                         <ListGroup.Item>demo@gmail.com</ListGroup.Item>
                                         <ListGroup.Item onClick = { () => history.push("/buycrypto")}>Buy Crypto</ListGroup.Item>
                                         <ListGroup.Item onClick = { () => history.push("/transaction-history")}>Transaction History</ListGroup.Item>
                                         <ListGroup.Item onClick = { () => history.push("/phone-verify")}>KYC</ListGroup.Item>
+                                        <ListGroup.Item onClick = { () => setMenu(false)}>Logout</ListGroup.Item>
                                     </ListGroup>
                                 </Card>
                             }
