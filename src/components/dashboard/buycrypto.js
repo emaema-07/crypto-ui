@@ -98,7 +98,8 @@ const BuyCrypto = props => {
       }
     };
 
-    props.orderDetails(data);
+    props.storeDetails(data);
+    history.push("/add-account");
   };
   const handleChange = event => {
     if (props && props.currencylist) {
@@ -175,7 +176,8 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   orderDetails: actions.buyOrderDetails,
-  getCurrencies: initialactions.getCurrencies
+  getCurrencies: initialactions.getCurrencies,
+  storeDetails: actions.storeDetails,
 })(BuyCrypto);
 
 const styles = {

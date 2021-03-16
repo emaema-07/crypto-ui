@@ -13,12 +13,9 @@ const PhoneVerify = props => {
   });
 
   const validateNumber = str => {
-    var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(
-      str
-    );
+    var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test( str ); // eslint-disable-line  
     return a;
   };
-
   const onSubmit = () => {
     if (validateNumber(state.phone_number)) {
       props.storeKycDetails({ phone_number: state.phone_number });

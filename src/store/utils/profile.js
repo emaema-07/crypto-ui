@@ -29,12 +29,10 @@ export async function getLoginReq(params) {
 }
 
 export async function getKycReq(params) {
-  console.log(params,'r')
   const url = getKycDetailsCall(params).list;
   try {
     const response = await fetch(url,);
     const json = await response.json();
-    console.log(json,'json')
     return json;
   } catch (error) {
     return error;

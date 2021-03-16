@@ -22,8 +22,7 @@ const HomePage = props => {
 
   useEffect(() => {
     const userDetails = localStorage.getItem("current_user_details");
-    console.log(JSON.parse(userDetails),'userDetails')
-    {userDetails && userDetails.email &&
+    {userDetails && JSON.parse(userDetails).email &&
     props.kycCall(JSON.parse(userDetails).email)}
   }, []); // eslint-disable-line
 

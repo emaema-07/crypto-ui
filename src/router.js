@@ -15,6 +15,8 @@ import Dashboard from './components/dashboard/dashboard';
 import LoadHistory from './components/dashboard/loadHistory';
 import TransactionHistory from './components/dashboard/transactionHistory';
 import BuyCrypto from './components/dashboard/buycrypto';
+import AddAccount from './components/dashboard/addAccount';
+import PaymentSummary from './components/dashboard/paymentSummary';
  
 const MainRouter = () => {
   return (
@@ -49,6 +51,12 @@ const MainRouter = () => {
         </Route>
         <Route path="/buycrypto">
           <BuyCrypto />
+        </Route>
+        <Route path="/add-account">
+          <AddAccount />
+        </Route>
+        <Route path="/payment-summary">
+          <PaymentSummary />
         </Route>
         <Route path={["/home-page", "/"]}>
           <HomePage />
