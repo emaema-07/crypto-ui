@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import React from "react";
+import { Card, Button } from "react-bootstrap";
 import { GrFormClose } from 'react-icons/gr';
 import { MdHourglassEmpty } from 'react-icons/md';
 
 const LoadHistory = () => {
-    //   const history = useHistory();
-    const [qrCode, setQrCode] = useState(false);
     return (
         <div>
             <div style={styles.head}>

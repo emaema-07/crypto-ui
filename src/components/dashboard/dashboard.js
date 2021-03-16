@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Button, Form } from "react-bootstrap";
 
 const Dashboard = () => {
     //   const history = useHistory();
-    const [qrCode, setQrCode] = useState(false);
     return (
         <div>
             <div style={styles.head}>
