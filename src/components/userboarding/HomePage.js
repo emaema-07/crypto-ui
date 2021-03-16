@@ -13,7 +13,7 @@ const HomePage = props => {
     if(authtoken && props.kyc_data && props.kyc_data.kyc === null){
       history.push("/phone-verify");
     }else if(authtoken && props.kyc_data && props.kyc_data.kyc !== null){
-      history.push("/dashboard");
+      history.push("/buycrypto");
     }
     else{
       history.push("/login");

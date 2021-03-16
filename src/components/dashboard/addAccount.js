@@ -18,7 +18,7 @@ const AddAccount = props => {
     if (state.acc_no) {
       history.push("/payment-summary");
     } else {
-      alert("Insert proper number");
+      alert("Insert proper Details");
     }
   };
 
@@ -30,7 +30,7 @@ const AddAccount = props => {
             <h2>Add Card No </h2>
           </b>
           
-            <div >
+            <div style={{marginTop: 20}}>
               <span>Card No </span>
               <Form.Control
                 type="number"
@@ -41,12 +41,13 @@ const AddAccount = props => {
                 }
               />
             </div>
-            <div >
+            <div style={styles.card_style}>
+            <div>
               <span>CVV Code  </span>
               <Form.Control
                 type="number"
                 placeholder="Enter Your CVV Code"
-                style={styles.textfield}
+                style={styles.textfield1}
                 onChange={event =>
                     setState({ ...state, cvv_code: event.target.value })
                   }
@@ -57,16 +58,17 @@ const AddAccount = props => {
               <Form.Control
                 type="number"
                 placeholder="Enter Your Expiry Year"
-                style={styles.textfield}
+                style={styles.textfield1}
                 onChange={event =>
                     setState({ ...state, expiry_date: event.target.value })
                   }
               />
             </div>
+            </div>
           <Button
             variant="warning"
             block
-            style={{marginTop:"10%"}}
+            style={styles.btn_style}
             onClick={() => onSubmit()}
           >
             Next
@@ -91,6 +93,20 @@ const styles = {
     textAlign: "left"
   },
   textfield:{
-     height:"50%",
-  }
+     marginTop: 10,
+     marginBottom: 10
+  },
+  textfield1:{
+    marginTop: 10,
+    marginBottom: 10,
+    width: "98%"
+ },
+ card_style: {
+   display: 'flex',
+   marginTop: 20
+ },
+ btn_style: {
+  marginTop: 40,
+  borderRadius: 20
+},
 };

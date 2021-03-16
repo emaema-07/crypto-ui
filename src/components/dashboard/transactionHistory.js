@@ -26,16 +26,16 @@ const TransactionHistory = (props) => {
  
   return (
     <div>
-      <div style={styles.head}>
+      {/* <div style={styles.head}>
         <Button style={{ borderRadius: '50px', backgroundColor: "#212529" }}>Verify</Button>
         <Button style={{ borderRadius: '50px', backgroundColor: "#fd7e14" }}>AR</Button>
-      </div>
+      </div> */}
       <div style={{marginTop: 20}} >
-        <Card style={{ width: '100%', height: "100%" }}>
+        <Card style={{ width: '100%', height: "100%", border: 0 }}>
           <Card.Body >
             <div style={styles.head}>
               <h4 style={{ textAlign: "left", }}>Transaction History</h4>
-              <GrFormClose />
+              <GrFormClose style={{height: 30, width: 30}}/>
             </div>
             {state.data && state.data.length > 0 ? 
       <div>

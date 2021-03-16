@@ -29,14 +29,14 @@ const Dashboard = props => {
   };
   return (
     <div>
-      <div style={styles.head}>
+      {/* <div style={styles.head}>
         <Button style={{ borderRadius: "50px", backgroundColor: "#212529" }}>
           Verify
         </Button>
         <Button style={{ borderRadius: "50px", backgroundColor: "#fd7e14" }}>
           AR
         </Button>
-      </div>
+      </div> */}
 
       <div>
         <Card
