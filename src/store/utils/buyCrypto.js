@@ -1,7 +1,7 @@
-import { setKycCall } from "./network";
+import { setbuyCryptoCall } from "./network";
 
-export async function setKycdetailsReq(params) {
-  const url = setKycCall().list;
+export async function setBuyCryptoReq(params) {
+  const url = setbuyCryptoCall().list;
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -9,7 +9,7 @@ export async function setKycdetailsReq(params) {
         "Content-Type": "application/json",
         Authorization: "Bearer" + " " + params.token //eslint-disable-line
       },
-      body: JSON.stringify(params.data)
+      body: JSON.stringify(params.value)
     });
     const json = await response.json();
     return json;

@@ -1,7 +1,7 @@
-import { getFirstCall } from "./network";
+import { gettradeHistoryCall } from "./network";
 
 export async function getTradeHistorty(params) {
-  const url = getFirstCall(params.id).list;
+  const url = gettradeHistoryCall(params.id).list;
   try {
     const response = await fetch(url, {
       method: "GET",

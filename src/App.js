@@ -8,9 +8,7 @@ import Footer from './Footer';
 function App() {
   return (
     <div className="App">
-      <div style={styles.logo_style}>
-        <h4 style={{display: 'none'}}>{'s'}</h4>
-      </div>
+      <img style={styles.logo_style} src="https://getspendl.com/wp-content/themes/understrap-child/img/logo.svg" alt="logo" />
       <Card style={styles.cardStyle}>
         <Card.Body>
           <Router />
@@ -30,12 +28,10 @@ export default App;
 
 const styles = {
   logo_style: {
-    backgroundImage: "url('https://getspendl.com/wp-content/themes/understrap-child/img/logo.svg')",
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'left',
     marginTop: 20,
     marginLeft: 20,
-    position: "relative",
+    position: "absolute",
+    left: 20,
   },
   cardStyle: {
     width: "40%",

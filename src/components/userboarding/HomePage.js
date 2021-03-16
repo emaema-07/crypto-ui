@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { actions } from "../../store/reducers/buyCrypto";
 
-const HomePage = () => {
+const HomePage = props => {
   const history = useHistory();
 
   const onSubmit = () => {
     history.push("/login");
   };
+
+  useEffect(() => {
+    props.clearStatus();
+  }, [props]);
+
   return (
     <div style={styles.root}>
       <b>
@@ -34,7 +41,14 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = state => {
+  return {
+    currencylist: state.initial.currencyList
+  };
+};
+export default connect(mapStateToProps, {
+  clearStatus: actions.clearStatus
+})(HomePage);
 
 const styles = {
   root: {
