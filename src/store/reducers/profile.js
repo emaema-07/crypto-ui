@@ -7,13 +7,21 @@ export const constants = {
   LOGIN_CALL_SUCCESS: "LOGIN_CALL_SUCCESS",
   LOGIN_CALL_FAILURE: "LOGIN_CALL_FAILURE",
 
-  CLEAR_STATUS: "CLEAR_STATUS"
+  CLEAR_STATUS: "CLEAR_STATUS",
+
+  CLEAR_LOGIN: "CLEAR_LOGIN"
 };
 
 export const actions = {
   clearStatus: params => {
     return {
       type: constants.CLEAR_STATUS,
+      payload: params
+    };
+  },
+  clearLogin: params => {
+    return {
+      type: constants.CLEAR_LOGIN,
       payload: params
     };
   },
@@ -57,13 +65,21 @@ export const actions = {
 
 export const initialState = {
   isLoading: false,
-  user_details: null,
-  user_token: null,
+  current_user_details: null,
+  auth_token: null,
   login_success: false,
+  kyc_data: null,
 };
 
 export const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case constants.CLEAR_LOGIN: 
+      return {
+        ...state,
+        login_success: false,
+        current_user_details: null,
+        auth_token: null,
+      }
     case constants.CLEAR_STATUS:
       return {
         ...state,
@@ -79,15 +95,16 @@ export const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        user_token: action.payload.data.token,
-        user_details: action.payload.data.user,
+        auth_token: action.payload.data.token,
+        current_user_details: action.payload.data.user,
         login_success: true,
+        kyc_data: null
       };
     case constants.SIGNUP_CALL_FAILURE:
       return {
         ...state,
         isLoading: false,
-        user_details: null,
+        current_user_details: null,
         login_success: false,
       };
     case constants.LOGIN_CALL:
@@ -99,15 +116,17 @@ export const ProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        user_token: action.payload.data.token,
-        user_details: action.payload.data.user,
+        auth_token: action.payload.data.token,
+        current_user_details: action.payload.data.user,
+        kyc_data: action.payload.data.kyc,
         login_success: true,
       };
     case constants.LOGIN_CALL_FAILURE:
       return {
         ...state,
         isLoading: false,
-        user_details: null
+        current_user_details: null,
+        kyc_data: null
       };
     default:
       return state;

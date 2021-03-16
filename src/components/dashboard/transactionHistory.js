@@ -12,8 +12,8 @@ const TransactionHistory = (props) => {
   })
 
   useEffect(() => {
-    const userToken = localStorage.getItem("user_token");
-    const userDetails = localStorage.getItem("user_details");
+    const userToken = localStorage.getItem("auth_token");
+    const userDetails = localStorage.getItem("current_user_details");
     props.getTradeHistory({token: userToken, id: userDetails && JSON.parse(userDetails)._id});
   },[]); // eslint-disable-line
 

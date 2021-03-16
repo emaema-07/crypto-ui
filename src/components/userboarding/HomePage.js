@@ -8,7 +8,12 @@ const HomePage = props => {
   const history = useHistory();
 
   const onSubmit = () => {
-    history.push("/login");
+    const authtoken = localStorage.getItem('auth_token');
+    if(authtoken){
+      history.push("/address");
+    }else{
+      history.push("/login");
+    }
   };
 
   useEffect(() => {

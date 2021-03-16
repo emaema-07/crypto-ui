@@ -6,7 +6,7 @@ import { actions } from "../../store/reducers/profile";
 
 const LoginPage = props => {
   const [state, setState] = useState({
-    login: false,
+    login: true,
     email: null,
     password: null
   });
@@ -14,8 +14,8 @@ const LoginPage = props => {
 
   useEffect(() => {
     if(props && props.loginStatus){
-      localStorage.setItem('user_token', props.userToken);
-      localStorage.setItem('user_details', JSON.stringify(props.profileDetails))
+      localStorage.setItem('auth_token', props.userToken);
+      localStorage.setItem('current_user_details', JSON.stringify(props.profileDetails))
       history.push("/verify");
     }
   },[props]) //eslint-disable-line
@@ -197,8 +197,8 @@ const LoginPage = props => {
 const mapStateToProps = state => {
   return {
     initialData: state.initial.details,
-    profileDetails: state.profile.user_details,
-    userToken: state.profile.user_token,
+    profileDetails: state.profile.current_user_details,
+    userToken: state.profile.auth_token,
     loginStatus: state.profile.login_success,
   };
 };

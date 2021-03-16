@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { actions } from "../../store/reducers/kyc";
 
-const PhoneVerify = (props) => {
+const PhoneVerify = props => {
   const history = useHistory();
   const [state, setState] = useState({
     code: false,
@@ -12,10 +12,22 @@ const PhoneVerify = (props) => {
     country: null
   });
 
-  const onSubmit = () => {
-    props.storeKycDetails({phone_number: state.phone_number});
-    history.push("/address");
+  const validateNumber = str => {
+    var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(
+      str
+    );
+    return a;
   };
+
+  const onSubmit = () => {
+    if (validateNumber(state.phone_number)) {
+      props.storeKycDetails({ phone_number: state.phone_number });
+      history.push("/address");
+    } else {
+      alert("Insert proper number");
+    }
+  };
+
   return (
     <div style={styles.root}>
       <p>Step 1/3</p>
@@ -29,7 +41,12 @@ const PhoneVerify = (props) => {
           <div style={styles.head}>
             <div style={styles.head1}>
               <span>Country</span>
-              <Form.Control as="select" onChange={(event) => setState({...state, country: event.target.value})}>
+              <Form.Control
+                as="select"
+                onChange={event =>
+                  setState({ ...state, country: event.target.value })
+                }
+              >
                 <option value="Afghanistan +93">Afghanistan +93</option>
                 <option value="Albania +355">Albania +355</option>
                 <option value="Algeria +213">Algeria +213</option>
@@ -43,12 +60,18 @@ const PhoneVerify = (props) => {
                 type="number"
                 placeholder="Required"
                 style={styles.textfield}
-                onChange={(event) => setState({...state, phone_number: event.target.value})}
+                onChange={event =>
+                  setState({ ...state, phone_number: event.target.value })
+                }
               />
             </div>
           </div>
 
-          <Button variant="warning" block onClick={() => setState({...state, code: true})}>
+          <Button
+            variant="warning"
+            block
+            onClick={() => setState({ ...state, code: true })}
+          >
             Next
           </Button>
         </>
@@ -79,13 +102,12 @@ const PhoneVerify = (props) => {
 
 const mapStateToProps = state => {
   return {
-    initialData: state.initial.details,
+    initialData: state.initial.details
   };
 };
 export default connect(mapStateToProps, {
-  storeKycDetails: actions.storeKycDetails,
+  storeKycDetails: actions.storeKycDetails
 })(PhoneVerify);
-
 
 const styles = {
   root: {

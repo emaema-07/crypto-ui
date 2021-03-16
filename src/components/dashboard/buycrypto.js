@@ -54,8 +54,8 @@ const BuyCrypto = props => {
 
   useEffect(() => {
     props.getCurrencies();
-    const userToken = localStorage.getItem("user_token");
-    const userDetails = localStorage.getItem("user_details");
+    const userToken = localStorage.getItem("auth_token");
+    const userDetails = localStorage.getItem("current_user_details");
     setState({
       ...state,
       userDetails: JSON.parse(userDetails),
