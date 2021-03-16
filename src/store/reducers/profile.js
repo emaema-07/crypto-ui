@@ -72,19 +72,23 @@ export const ProfileReducer = (state = initialState, action) => {
     case constants.SIGNUP_CALL:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        login_success: false,
       };
     case constants.SIGNUP_CALL_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        user_details: action.payload.data
+        user_token: action.payload.data.token,
+        user_details: action.payload.data.user,
+        login_success: true,
       };
     case constants.SIGNUP_CALL_FAILURE:
       return {
         ...state,
         isLoading: false,
-        user_details: null
+        user_details: null,
+        login_success: false,
       };
     case constants.LOGIN_CALL:
       return {
