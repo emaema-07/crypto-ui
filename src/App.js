@@ -38,6 +38,8 @@ const styles = {
     position: "absolute",
     left:" 50%",
     top: "40%",
+    height: "50%",
+    overflow: "auto",
     transform: "translate(-50%, -50%)",
   },
   footer_style: {
