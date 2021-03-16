@@ -1,14 +1,38 @@
 import React from 'react';
-
+import { connect } from "react-redux";
+import { actions } from "../src/store/reducers/profile";
 import './App.css';
 import Router from './router';
-import { Jumbotron, Card, } from 'react-bootstrap'
+import { Jumbotron, Card,NavDropdown } from 'react-bootstrap'
 import Footer from './Footer';
 
-function App() {
+function App(props) {
+
+  const onLogoutPress = () => {
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("current_user_details");
+    props.clearLogin();
+    const link = window.location.host;
+    window.location.assign(link);
+  };
   return (
     <div className="App">
       <img style={styles.logo_style} src="https://getspendl.com/wp-content/themes/understrap-child/img/logo.svg" alt="logo" />
+      <div >
+      <NavDropdown  active={false} style={styles.header} title={
+        <span style={{color:"black"}}>Menu</span>
+    } id="basic-nav-dropdown">
+       <NavDropdown.Item  href="/">Home</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item  href="/buycrypto">Buy Crypto</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="/transaction-history">Trade History</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="/phone-verify">Kyc</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item onClick={() => onLogoutPress()}>Logout</NavDropdown.Item>
+      </NavDropdown>
+      </div>
       <Card style={styles.cardStyle}>
         <Card.Body>
           <Router />
@@ -24,7 +48,13 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+  };
+};
+export default connect(mapStateToProps, {
+  clearLogin: actions.clearLogin
+})(App);
 
 const styles = {
   logo_style: {
@@ -51,9 +81,17 @@ const styles = {
     backgroundColor: '#1b243f',
     padding: 0,
   },
+  header: {
+    position:'absolute',
+    right:20,
+    top:20,
+    "& a":{
+      color: 'black'
+    }
+},
   footer_text_style: {
     display: 'flex',
     justifyContent: 'space-between',
     textAlign: 'left'
-  }
+  },
 }
