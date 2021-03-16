@@ -18,6 +18,9 @@ const LoginPage = props => {
       localStorage.setItem('current_user_details', JSON.stringify(props.profileDetails))
       history.push("/verify");
     }
+    if(props && props.loginMessage){
+      alert(props.loginMessage)
+    }
   },[props]) //eslint-disable-line
 
   const onHandleChange = (item, data) => {
@@ -200,6 +203,7 @@ const mapStateToProps = state => {
     profileDetails: state.profile.current_user_details,
     userToken: state.profile.auth_token,
     loginStatus: state.profile.login_success,
+    loginMessage: state.profile.message
   };
 };
 export default connect(mapStateToProps, {

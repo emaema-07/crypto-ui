@@ -4,41 +4,13 @@ import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import btcIcon from "@iconify/icons-cryptocurrency/btc";
 import ethIcon from "@iconify/icons-cryptocurrency/eth";
-import dogeIcon from "@iconify/icons-cryptocurrency/doge";
-import usdtIcon from "@iconify/icons-cryptocurrency/usdt";
-import bchIcon from "@iconify/icons-cryptocurrency/bch";
-import adaIcon from "@iconify/icons-cryptocurrency/ada";
-import batIcon from "@iconify/icons-cryptocurrency/bat";
-import linkIcon from "@iconify/icons-cryptocurrency/link";
-import daiIcon from "@iconify/icons-cryptocurrency/dai";
-import dashIcon from "@iconify/icons-cryptocurrency/dash";
-import ltcIcon from "@iconify/icons-cryptocurrency/ltc";
-import omgIcon from "@iconify/icons-cryptocurrency/omg";
-import xrpIcon from "@iconify/icons-cryptocurrency/xrp";
-import tusdIcon from "@iconify/icons-cryptocurrency/tusd";
-import usdcIcon from "@iconify/icons-cryptocurrency/usdc";
-import utkIcon from "@iconify/icons-cryptocurrency/utk";
 import { connect } from "react-redux";
 import { actions } from "../../store/reducers/buyCrypto";
-import { actions as initialactions } from "../../store/reducers/initial";
+import { actions as curractions } from "../../store/reducers/currency";
 
 const coinslist = [
   { name: "BTC - Bitcoin", icon: btcIcon, color: "#f69438" },
-  { name: "DOGE - Dogecoin", icon: dogeIcon, color: "#c3a634" },
-  { name: "ETH - Ethereum", icon: ethIcon, color: "#627eea" },
-  { name: "USDT - Tether (ERC-20)", icon: usdtIcon, color: "#35a17b" },
-  { name: "ADA - Cardano", icon: adaIcon, color: "#0d1e31" },
-  { name: "BCH - Bitcoin Cash", icon: bchIcon, color: "#42c48b" },
-  { name: "BAT - Basic Attention Token", icon: batIcon, color: "#fa533b" },
-  { name: "LINK - Chainlink", icon: linkIcon, color: "#2e66da" },
-  { name: "DAI - Dai", icon: daiIcon, color: "#fab238" },
-  { name: "DASH - Dash", icon: dashIcon, color: "#028ce7" },
-  { name: "LTC - Litecoin", icon: ltcIcon, color: "#a5a8a9" },
-  { name: "OMG - OMG Network", icon: omgIcon, color: "#101010" },
-  { name: "XRP - Ripple", icon: xrpIcon, color: "#222222" },
-  { name: "TUSD - TrueUSD", icon: tusdIcon, color: "#7ac7bc" },
-  { name: "USDC - USD Coin", icon: usdcIcon, color: "#2775ca" },
-  { name: "UTK - Utrust", icon: utkIcon, color: "#31377a" }
+  { name: "ETH - Ethereum", icon: ethIcon, color: "#627eea" }
 ];
 
 const BuyCrypto = props => {
@@ -128,7 +100,7 @@ const BuyCrypto = props => {
           })}
         </Form.Control>
         <Form.Group>
-          <p style={{ textAlign: "left" }}>Amount</p>
+          <p style={{ textAlign: "left", marginTop: 10 }}>Amount</p>
           <Form.Control
             type="number"
             placeholder="Required"
@@ -159,7 +131,7 @@ const BuyCrypto = props => {
       <Button
         variant="warning"
         block
-        style={{ marginTop: "8px" }}
+        style={styles.btn_style}
         onClick={() => onSubmit()}
       >
         Buy Now
@@ -170,13 +142,13 @@ const BuyCrypto = props => {
 
 const mapStateToProps = state => {
   return {
-    currencylist: state.initial.currencyList,
+    currencylist: state.currency.currencyList,
     isSuccess: state.buyCrypto.is_success
   };
 };
 export default connect(mapStateToProps, {
   orderDetails: actions.buyOrderDetails,
-  getCurrencies: initialactions.getCurrencies,
+  getCurrencies: curractions.getCurrencies,
   storeDetails: actions.storeDetails,
 })(BuyCrypto);
 
@@ -200,5 +172,9 @@ const styles = {
     border: "none",
     width: "20%",
     textAlign: "center"
+  },
+  btn_style: {
+    marginTop: 40,
+    borderRadius: 20
   }
 };

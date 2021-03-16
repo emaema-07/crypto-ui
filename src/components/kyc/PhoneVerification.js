@@ -16,6 +16,15 @@ const PhoneVerify = props => {
     var a = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test( str ); // eslint-disable-line  
     return a;
   };
+
+  const onNextClick = () => {
+    if (validateNumber(state.phone_number)) {
+      setState({ ...state, code: true })
+    } else {
+      alert("Insert proper number");
+    }
+  }
+
   const onSubmit = () => {
     if (validateNumber(state.phone_number)) {
       props.storeKycDetails({ phone_number: state.phone_number });
@@ -32,9 +41,9 @@ const PhoneVerify = props => {
       {!state.code ? (
         <>
           <b>
-            <h2>Phone Verification</h2>
+            <h2 style={{marginTop: 20}}>Phone Verification</h2>
           </b>
-          <p>Please enter your phone number for verification</p>
+          <p style={{marginTop: 10}}>Please enter your phone number for verification</p>
           <div style={styles.head}>
             <div style={styles.head1}>
               <span>Country</span>
@@ -44,11 +53,12 @@ const PhoneVerify = props => {
                   setState({ ...state, country: event.target.value })
                 }
               >
-                <option value="Afghanistan +93">Afghanistan +93</option>
-                <option value="Albania +355">Albania +355</option>
-                <option value="Algeria +213">Algeria +213</option>
-                <option value="India +91">India +91</option>
-                <option value="Colombia +57">Colombia +57</option>
+                <option>select one</option>
+                <option value="+93">Afghanistan +93</option>
+                <option value="+355">Albania +355</option>
+                <option value="+213">Algeria +213</option>
+                <option value="+91">India +91</option>
+                <option value="+57">Colombia +57</option>
               </Form.Control>
             </div>
             <div style={styles.head1}>
@@ -65,9 +75,10 @@ const PhoneVerify = props => {
           </div>
 
           <Button
+            style={styles.btn_style}
             variant="warning"
             block
-            onClick={() => setState({ ...state, code: true })}
+            onClick={() => onNextClick() }
           >
             Next
           </Button>
@@ -75,7 +86,7 @@ const PhoneVerify = props => {
       ) : (
         <div>
           <h2>Phone Verification</h2>
-          <p>We have sent a confirmation code to +351916019420</p>
+          <p>We have sent a confirmation code to {state.country + " " +state.phone_number}</p>
           <Form>
             <Form.Group>
               <p style={{ textAlign: "left" }}>Confirmation code</p>
@@ -85,10 +96,10 @@ const PhoneVerify = props => {
                 style={styles.textfield}
               />
             </Form.Group>
-            <Button variant="warning" block onClick={() => onSubmit()}>
+            <Button style={styles.btn_style} variant="warning" block onClick={() => onSubmit()}>
               Next
             </Button>
-            <p>Resend code</p>
+            <p style={{marginTop: 10}}>Resend code</p>
             <p>Change Number</p>
           </Form>
         </div>
@@ -116,5 +127,9 @@ const styles = {
   },
   head1: {
     padding: 5
+  },
+  btn_style: {
+    marginTop: 40,
+    borderRadius: 20
   }
 };

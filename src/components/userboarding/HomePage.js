@@ -32,10 +32,11 @@ const HomePage = props => {
 
   return (
     <div style={styles.root}>
+      <img style={styles.logo_style} src="https://getspendl.com/wp-content/themes/understrap-child/img/logo.svg" alt="logo" />
       <b>
         <h2 style={{ fontWeight: "bold" }}>Welcome to</h2>
       </b>
-      <h4 style={{ color: "#ffc107" }}>Spendl</h4>
+      <h4 style={{ color: "#ffc107", fontWeight: 'bold', fontSize: 35 }}>Spendl</h4>
       <h6 style={{ opacity: 0.7, marginTop: 20 }}>Simply pay anywhere</h6>
       {/* <Col md={4}>md=4</Col> */}
       <p style={{ opacity: 0.5, marginTop: 20 }}>
@@ -70,6 +71,11 @@ export default connect(mapStateToProps, {
 const styles = {
   root: {
     textAlign: "left"
+  },
+  logo_style: {
+    marginTop: 20,
+    height: 40,
+    marginBottom: 20
   },
   btn_style: {
     borderRadius: 20

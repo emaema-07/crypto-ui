@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Card, Button, Form, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -7,12 +7,25 @@ import { actions } from "../../store/reducers/profile";
 const Dashboard = props => {
   const history = useHistory();
   const [menu, setMenu] = useState(false);
+  const myRef = useRef();
+
+  const handleClickOutside = e => {
+      if (!myRef.current.contains(e.target)) {
+        setMenu(false);
+      }
+  };
+
+  useEffect(() => {
+    menu && document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+  });
 
   const onLogoutPress = () => {
     setMenu(false);
     localStorage.removeItem("auth_token");
     localStorage.removeItem("current_user_details");
     props.clearLogin();
+    history.push('/')
   };
   return (
     <div>
@@ -27,7 +40,7 @@ const Dashboard = props => {
 
       <div>
         <Card
-          style={{ width: "100%", height: "100%", backgroundColor: "#f8c717" }}
+          style={{ width: "100%", height: "100%", backgroundColor: "#f8c717", marginTop: 20 }}
         >
           <Card.Body>
             <div style={styles.head}>
@@ -41,7 +54,7 @@ const Dashboard = props => {
                   Load
                 </Button>
               ) : (
-                <Card style={{ width: "12rem", cursor: "pointer" }}>
+                <Card style={{ width: "12rem", cursor: "pointer" }} ref={myRef}>
                   <ListGroup variant="flush">
                     <ListGroup.Item>demo@gmail.com</ListGroup.Item>
                     <ListGroup.Item onClick={() => history.push("/buycrypto")}>

@@ -56,7 +56,7 @@ const Load = () => {
                 placeholder="Required"
                 style={styles.textfield}
               />
-            <ImQrcode style={{height:"50px"}} onClick = { () => setQrCode(true)}/>
+            <ImQrcode style={styles.code_style} onClick = { () => setQrCode(true)}/>
             </div>
             </Form.Group>
           </Form>
@@ -80,10 +80,17 @@ const styles = {
   head: {
     textAlign: "left",
     display: "flex",
-     justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   head1: {
     padding: 5,
     display: "flex",
+  },
+  code_style: {
+    height:"50px",
+    position: 'absolute',
+    right: 30,
+    cursor: "pointer"
   }
 };

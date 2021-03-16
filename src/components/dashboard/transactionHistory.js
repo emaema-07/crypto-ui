@@ -30,7 +30,7 @@ const TransactionHistory = (props) => {
         <Button style={{ borderRadius: '50px', backgroundColor: "#212529" }}>Verify</Button>
         <Button style={{ borderRadius: '50px', backgroundColor: "#fd7e14" }}>AR</Button>
       </div>
-      <div >
+      <div style={{marginTop: 20}} >
         <Card style={{ width: '100%', height: "100%" }}>
           <Card.Body >
             <div style={styles.head}>

@@ -47,7 +47,7 @@ const Address = props => {
 
       <>
         <b>
-          <h2>Home Address</h2>
+          <h2 style={{marginTop: 10}}>Home Address</h2>
         </b>
         <p>Please enter your home address</p>
         <Form>
@@ -89,10 +89,11 @@ const Address = props => {
               />
             </div>
           </div>
-          <span>Country</span>
+          <div style={{marginTop: 10}}>Country</div>
           <Form.Control
             as="select"
             custom
+            style={{marginTop: 10}}
             onChange={event => onDataChange("country", event)}
           >
             <option>Choose</option>
@@ -105,7 +106,7 @@ const Address = props => {
         <Button
           variant="warning"
           block
-          style={{ marginTop: "8px" }}
+          style={styles.btn_style}
           onClick={() => onSubmit()}
         >
           Next
@@ -136,7 +137,12 @@ const styles = {
     padding: 5
   },
   textfield: {
+    marginTop: 5,
     border: "2px",
     borderBottom: "1px solid "
+  },
+  btn_style: {
+    marginTop: 20,
+    borderRadius: 20
   }
 };

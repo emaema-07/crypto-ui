@@ -7,10 +7,22 @@ import { actions } from "../../store/reducers/profile";
 const VerifyEmail = (props) => {
   const history = useHistory();
   const [state, setState] = useState({
-    code: null
+    code: null,
+    details: null
   });
+
+  useEffect(() => {
+    if(props && props.typedDatas){
+      setState({...state, details: props.typedDatas})
+    }
+  },[props])//eslint-disable-line
+
   const onSubmit = () => {
-    history.push("/phone-verify");
+    if(props.kycData){
+      history.push('/buycrypto')
+    }else{
+      history.push("/phone-verify");
+    }
   };
 
   useEffect(() => {
@@ -20,12 +32,12 @@ const VerifyEmail = (props) => {
   return (
     <div>
       <h2 style={{ fontWeight: "bold" }}>Verify Your Email</h2>
-      <p style={{ opacity: 0.5 }}>
-        We have sent a confirmation code to demo@gmail.com
+      <p style={{ opacity: 0.5, marginTop: 20 }}>
+        We have sent a confirmation code to {state.details && state.details.email}
       </p>
       <Form>
         <Form.Group>
-          <p style={{ textAlign: "left" }}>Confirmation code</p>
+          <p style={{ textAlign: "left", marginTop: 20 }}>Confirmation code</p>
           <Form.Control
             type="email"
             onChange={event => setState({ ...state, code: event.target.value })}
@@ -49,8 +61,11 @@ const VerifyEmail = (props) => {
 };
 
 const mapStateToProps = state => {
+  console.log('dat adta adt', state.profile.kyc_data)
   return {
     initialData: state.initial.details,
+    kycData: state.profile.kyc_data,
+    typedDatas: state.profile.user_typed_datas,
   };
 };
 export default connect(mapStateToProps, {
@@ -59,10 +74,12 @@ export default connect(mapStateToProps, {
 
 const styles = {
   textfield: {
+    marginTop: 20,
     border: "2px",
     borderBottom: "1px solid "
   },
   btn_style: {
+    marginTop: 40,
     borderRadius: 20
   }
 };

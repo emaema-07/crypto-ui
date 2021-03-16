@@ -91,6 +91,8 @@ export const initialState = {
   auth_token: null,
   login_success: false,
   kyc_data: null,
+  user_typed_datas: null,
+  message: null,
 };
 
 export const ProfileReducer = (state = initialState, action) => {
@@ -105,13 +107,15 @@ export const ProfileReducer = (state = initialState, action) => {
     case constants.CLEAR_STATUS:
       return {
         ...state,
-        login_success: false
+        login_success: false,
+        message: null
       }
     case constants.SIGNUP_CALL:
       return {
         ...state,
         isLoading: true,
         login_success: false,
+        user_typed_datas: action.payload
       };
     case constants.SIGNUP_CALL_SUCCESS:
       return {
@@ -132,7 +136,9 @@ export const ProfileReducer = (state = initialState, action) => {
     case constants.LOGIN_CALL:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        user_typed_datas: action.payload,
+        message: null
       };
     case constants.LOGIN_CALL_SUCCESS:
       return {
@@ -142,13 +148,15 @@ export const ProfileReducer = (state = initialState, action) => {
         current_user_details: action.payload.data.user,
         kyc_data: action.payload.data.kyc,
         login_success: true,
+        message: null,
       };
     case constants.LOGIN_CALL_FAILURE:
       return {
         ...state,
         isLoading: false,
         current_user_details: null,
-        kyc_data: null
+        kyc_data: null,
+        message: action.payload.status,
       };
       case constants.GET_KYC:
       return {

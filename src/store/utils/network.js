@@ -1,5 +1,5 @@
-// const baseRestUrl = 'http://localhost:5000/api/v1/';
-const baseRestUrl = "https://spendl-api.herokuapp.com/api/v1/";
+const baseRestUrl = 'http://localhost:5000/api/v1/';
+// const baseRestUrl = "https://spendl-api.herokuapp.com/api/v1/";
 const baseRestUrl1 = "https://bumblepay-api.herokuapp.com/api/v1/";
 
 export const getFirstCall = () => ({
@@ -28,7 +28,7 @@ export const getCurrenciesCall = () => ({
 });
 
 export const setbuyCryptoCall = () => ({
-  list: baseRestUrl + "buy-crypto"
+  list: baseRestUrl + "transaction"
 });
 
 export const gettradeHistoryCall = data => ({

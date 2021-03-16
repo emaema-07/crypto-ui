@@ -28,14 +28,16 @@ export function* loginSaga(action) {
       const { response } = yield race({
         response: call(getLoginReq, params),
       });
-      if (response) {
+      if (response && response.user) {
         yield put(
           Profile.actions.loginCallSuccess({
             data: response,
           }),
         );
-      } else {
-        yield put(Profile.actions.loginCallFailure({ message: 'Fetch failure' }));
+      } else if(response && response.status) {
+        yield put(Profile.actions.loginCallFailure({ status: response.status }));
+      }else{
+        yield put(Profile.actions.loginCallFailure({ status: "Fetch Failure"}));
       }
     } catch (err) {
       yield put(Profile.actions.loginCallFailure({ message: 'Fetch failure' }));
