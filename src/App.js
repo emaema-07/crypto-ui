@@ -13,7 +13,7 @@ function App(props) {
     localStorage.removeItem("current_user_details");
     props.clearLogin();
     const link = window.location.host;
-    window.location.assign(link);
+    window.location.href = window.location.protocol+"//"+link;
   };
   return (
     <div className="App">
