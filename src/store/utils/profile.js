@@ -1,4 +1,4 @@
-import { setSignupCall, getUserDetailsCall } from "./network";
+import { setSignupCall, getUserDetailsCall,getKycDetailsCall } from "./network";
 
 export async function setSignUpReq(params) {
   const url = setSignupCall().list;
@@ -22,6 +22,19 @@ export async function getLoginReq(params) {
   try {
     const response = await fetch(url,);
     const json = await response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getKycReq(params) {
+  console.log(params,'r')
+  const url = getKycDetailsCall(params).list;
+  try {
+    const response = await fetch(url,);
+    const json = await response.json();
+    console.log(json,'json')
     return json;
   } catch (error) {
     return error;

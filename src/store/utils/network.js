@@ -34,3 +34,7 @@ export const setbuyCryptoCall = () => ({
 export const gettradeHistoryCall = data => ({
   list: baseRestUrl + "trade-history?id=" + data
 });
+
+export const getKycDetailsCall = data => ({
+  list: baseRestUrl + "users?email=" + data
+});

@@ -7,6 +7,10 @@ export const constants = {
   LOGIN_CALL_SUCCESS: "LOGIN_CALL_SUCCESS",
   LOGIN_CALL_FAILURE: "LOGIN_CALL_FAILURE",
 
+  GET_KYC: "GET_KYC",
+  GET_KYC_SUCCESS: "GET_KYC_SUCCESS",
+  GET_KYC_FAILURE: "GET_KYC_FAILURE",
+
   CLEAR_STATUS: "CLEAR_STATUS",
 
   CLEAR_LOGIN: "CLEAR_LOGIN"
@@ -58,6 +62,24 @@ export const actions = {
   loginCallFailure: response => {
     return {
       type: constants.LOGIN_CALL_FAILURE,
+      payload: response
+    };
+  },
+  kycCall: params => {
+    return {
+      type: constants.GET_KYC,
+      payload: params
+    };
+  },
+  kycCallSuccess: response => {
+    return {
+      type: constants.GET_KYC_SUCCESS,
+      payload: response
+    };
+  },
+  kycCallFailure: response => {
+    return {
+      type: constants.GET_KYC_FAILURE,
       payload: response
     };
   }
@@ -122,6 +144,24 @@ export const ProfileReducer = (state = initialState, action) => {
         login_success: true,
       };
     case constants.LOGIN_CALL_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        current_user_details: null,
+        kyc_data: null
+      };
+      case constants.GET_KYC:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case constants.GET_KYC_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        kyc_data: action.payload.data,
+      };
+    case constants.GET_KYC_FAILURE:
       return {
         ...state,
         isLoading: false,

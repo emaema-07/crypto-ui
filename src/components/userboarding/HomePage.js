@@ -3,18 +3,29 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { actions } from "../../store/reducers/buyCrypto";
+import {actions as profileaction} from "../../store/reducers/profile";
 
 const HomePage = props => {
   const history = useHistory();
 
   const onSubmit = () => {
     const authtoken = localStorage.getItem('auth_token');
-    if(authtoken){
-      history.push("/address");
-    }else{
+    if(authtoken && props.kyc_data && props.kyc_data.kyc === null){
+      history.push("/phone-verify");
+    }else if(authtoken && props.kyc_data && props.kyc_data.kyc !== null){
+      history.push("/dashboard");
+    }
+    else{
       history.push("/login");
     }
   };
+
+  useEffect(() => {
+    const userDetails = localStorage.getItem("current_user_details");
+    console.log(JSON.parse(userDetails),'userDetails')
+    {userDetails && userDetails.email &&
+    props.kycCall(JSON.parse(userDetails).email)}
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     props.clearStatus();
@@ -48,11 +59,13 @@ const HomePage = props => {
 
 const mapStateToProps = state => {
   return {
-    currencylist: state.initial.currencyList
+    currencylist: state.initial.currencyList,
+    kyc_data:state.profile.kyc_data, 
   };
 };
 export default connect(mapStateToProps, {
-  clearStatus: actions.clearStatus
+  clearStatus: actions.clearStatus,
+  kycCall:profileaction.kycCall
 })(HomePage);
 
 const styles = {
